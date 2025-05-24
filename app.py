@@ -52,7 +52,10 @@ if st.button('守信概率'):
         base_value = explainer.expected_value[1]  # 多分类取第二类
     else:
         base_value = explainer.expected_value  # 二分类直接使用
-
+    # 在SHAP可视化前设置字体
+    plt.rcParams['font.family'] = 'Microsoft YaHei'
+    plt.rcParams['axes.unicode_minus'] = False
+    
     # 可视化
     plt.figure()
     shap.force_plot(
@@ -63,10 +66,7 @@ if st.button('守信概率'):
     )
     st.pyplot(plt.gcf())
     
-    # 在SHAP可视化前设置字体
-    plt.rcParams['font.family'] = 'Microsoft YaHei'
-    plt.rcParams['axes.unicode_minus'] = False
-    
+
     # 创建瀑布图样式的个体特征分析
     fig, ax = plt.subplots(figsize=(10, 6))
 
