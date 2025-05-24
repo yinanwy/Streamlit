@@ -52,7 +52,7 @@ if st.button('守信概率'):
     else:
         base_value = explainer.expected_value  # 二分类直接使用
     # 在SHAP可视化前设置字体
-    plt.rcParams['font.family'] = 'Microsoft YaHei'  # 或 'SimHei'
+    plt.rcParams['font.family'] = 'SimHei'
     plt.rcParams['axes.unicode_minus'] = False
     # 可视化
     plt.figure()
