@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 import shap
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  
 
 @st.cache_resource
 def load_resources():
@@ -39,7 +39,7 @@ if st.button('守信概率'):
     input_scaled = scaler.transform(input_data)
     input_processed = normalizer.transform(input_scaled)
 
-    prob = model.predict_proba(input_processed)[0, 1]
+    prob = model.predict_proba(input_processed)[0, 1]  
     st.success(f"**守信概率：{prob:.1%}**")
 
     # SHAP解释
@@ -53,9 +53,8 @@ if st.button('守信概率'):
     else:
         base_value = explainer.expected_value  # 二分类直接使用
     # 在SHAP可视化前设置字体
-    plt.rcParams['font.family'] = 'Microsoft YaHei'
-    plt.rcParams['axes.unicode_minus'] = False
-    
+    plt.rcParams['font.family'] = 'Microsoft YaHei'  # 或 'SimHei'
+    plt.rcParams['axes.unicode_minus'] = False            
     # 可视化
     plt.figure()
     shap.force_plot(
