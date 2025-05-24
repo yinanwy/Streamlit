@@ -92,7 +92,7 @@ if st.button('守信概率'):
 
     # 添加数值标签
     for i, v in enumerate(ordered_values):
-        ax.text(v, i, f"{v:.3f}", color='black', ha='left' if v < 0 else 'right',  
+        ax.text(v, i, f"{v:.3f}", color='black', ha='left' if v < 0 else 'right',
                 va='center', fontsize=9)
 
     ax.legend()
