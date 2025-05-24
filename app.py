@@ -87,13 +87,11 @@ if st.button('守信概率'):
 
     # 添加基准线和预测线
     ax.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
-    ax.axvline(x=prob - base_value, color='blue', linestyle=':', linewidth=1,  
-               label=f'预测值 ({prob:.1%})')
+    ax.axvline(x=prob - base_value, color='blue', linestyle=':', linewidth=1,label=f'预测值 ({prob:.1%})')
 
     # 添加数值标签
     for i, v in enumerate(ordered_values):
-        ax.text(v, i, f"{v:.3f}", color='black', ha='left' if v < 0 else 'right',
-                va='center', fontsize=9)
+        ax.text(v, i, f"{v:.3f}", color='black', ha='left' if v < 0 else 'right',va='center', fontsize=9)  
 
     ax.legend()
     st.pyplot(fig)
@@ -103,7 +101,7 @@ if st.button('守信概率'):
     st.markdown(f"- 基准概率: {base_value:.1%}")
     for feature, value in zip(ordered_features, ordered_values):
         direction = "增加" if value > 0 else "减少"
-        st.markdown(f"- **{feature}**: {direction}了失信概率 ({value:.3f} SHAP值)")
+        st.markdown(f"- **{feature}**: {direction}了失信概率 ({value:.3f} SHAP值)")  
 
     # 显示原始输入值作为参考
     st.markdown("**当前输入值:**")
