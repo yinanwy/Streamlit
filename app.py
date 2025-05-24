@@ -65,19 +65,19 @@ if st.button('守信概率'):
     )
     st.pyplot(plt.gcf())
     # 在SHAP可视化前设置字体
-    plt.rcParams['font.family'] = 'Microsoft YaHei'
+    plt.rcParams['font.family'] = 'Microsoft YaHei'  
     plt.rcParams['axes.unicode_minus'] = False
     # 创建瀑布图样式的个体特征分析
     fig, ax = plt.subplots(figsize=(10, 6))
 
     # 按影响大小排序
-    feature_order = sorted(zip(input_data.columns, shap_values[0]),
-                           key=lambda x: abs(x[1]), reverse=False)
-    ordered_features = [x[0] for x in feature_order]
+    feature_order = sorted(zip(input_data.columns, shap_values[0]),  
+                           key=lambda x: abs(x[1]), reverse=False)  
+    ordered_features = [x[0] for x in feature_order]  
     ordered_values = [x[1] for x in feature_order]
 
     # 绘制每个特征的影响
-    y_pos = range(len(ordered_features))
+    y_pos = range(len(ordered_features))  
     colors = ['red' if val > 0 else 'green' for val in ordered_values]
     ax.barh(y_pos, ordered_values, color=colors, alpha=0.6)
     ax.set_yticks(y_pos)
@@ -91,18 +91,16 @@ if st.button('守信概率'):
 
     # 添加数值标签
     for i, v in enumerate(ordered_values):
-        ax.text(v, i, f"{v:.3f}", color='black', ha='left' if v < 0 else 'right',va='center', fontsize=9)  
-
+        ax.text(v, i, f"{v:.3f}", color='black', ha='left' if v < 0 else 'right',va='center', fontsize=9)
     ax.legend()
     st.pyplot(fig)
 
     # 详细解释每个特征C:\Users\ants\PycharmProjects\pythonProject1\企业信用\预测模型网页\8个
     st.markdown("**详细解释：**")
     st.markdown(f"- 基准概率: {base_value:.1%}")
-    for feature, value in zip(ordered_features, ordered_values):
+    for feature, value in zip(ordered_features, ordered_values):  
         direction = "增加" if value > 0 else "减少"
-        st.markdown(f"- **{feature}**: {direction}了失信概率 ({value:.3f} SHAP值)")  
-
+        st.markdown(f"- **{feature}**: {direction}了失信概率 ({value:.3f} SHAP值)")
     # 显示原始输入值作为参考
     st.markdown("**当前输入值:**")
     st.dataframe(input_data.style.format("{:.1f}"))
