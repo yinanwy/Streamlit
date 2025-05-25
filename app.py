@@ -50,7 +50,7 @@ if st.button('守信概率'):
     if isinstance(explainer.expected_value, (list, np.ndarray)):
         base_value = explainer.expected_value[1]  # 多分类取第二类
     else:
-        base_value = explainer.expected_value  # 二分类直接使用
+        base_value = explainer.expected_value  # 二分类直接使用  
     # 在SHAP可视化前设置字体
     plt.rcParams['font.family'] = 'SimHei'
     plt.rcParams['axes.unicode_minus'] = False
@@ -80,11 +80,11 @@ if st.button('守信概率'):
     ax.set_yticks(y_pos)
     ax.set_yticklabels(ordered_features)
     ax.set_xlabel('SHAP值 (对预测概率的影响)')
-    ax.set_title('各特征对失信概率的影响')
+    ax.set_title('各特征对守信概率的影响')
 
     # 添加基准线和预测线
     ax.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
-    ax.axvline(x=prob - base_value, color='blue', linestyle=':', linewidth=1, label=f'预测值 ({prob:.1%})')
+    ax.axvline(x=prob - base_value, color='blue', linestyle=':', linewidth=1, label=f'预测值 ({prob:.1%})')  
 
     # 添加数值标签
     for i, v in enumerate(ordered_values):
@@ -94,10 +94,10 @@ if st.button('守信概率'):
 
     # 详细解释每个特征
     st.markdown("**详细解释：**")
-    st.markdown(f"- 基准概率: {base_value:.1%}")
+    st.markdown(f"- 基准概率: {base_value:.1%}")  
     for feature, value in zip(ordered_features, ordered_values):
         direction = "增加" if value > 0 else "减少"
-        st.markdown(f"- **{feature}**: {direction}了失信概率 ({value:.3f} SHAP值)")
+        st.markdown(f"- **{feature}**: {direction}了守信概率 ({value:.3f} SHAP值)")  
     
     # 显示原始输入值作为参考
     st.markdown("**当前输入值:**")
