@@ -31,7 +31,6 @@ CS03 = st.number_input("纳税员工数")
 CS01 = st.number_input("企业规模(1=微型，2=小型，3=中型，4=大型)")
 CS04 = st.number_input("对外投资数")
 CR03 = st.number_input("关联异动监控")
-
 if st.button('守信概率'):
     input_data = pd.DataFrame([[CW02, CP05, CP02, CR02, CS03, CS01, CS04, CR03]],
                             columns=['CW02', 'CP05', 'CP02', 'CR02', 'CS03', 'CS01', 'CS04', 'CR03'])
