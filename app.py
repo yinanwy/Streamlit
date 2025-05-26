@@ -22,7 +22,7 @@ scaler = preprocessors['scaler']  # 4维标准化器
 normalizer = preprocessors['normalizer']  # 4维正则化器
 
 # 用户输入界面
-st.title('企业守信预测')
+st.title('养老服务机构信用风险评估')
 st.markdown("请输入指标：")
 
 # 输入字段
