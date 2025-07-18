@@ -28,7 +28,7 @@ st.markdown("请输入指标：")
 # 输入字段
 CW02 = st.number_input("资本实力(万)")
 CP05 = st.number_input("融资背景(次数)")
-CP02 = st.number_input("创新能力 ")
+CP02 = st.number_input("专利数量 ")
 CS03 = st.number_input("用工规模 ")
 
 if st.button('守信概率'):
