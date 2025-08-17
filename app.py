@@ -54,7 +54,7 @@ if st.button('守信等级'):
 
     # 使用HTML标记和颜色显示结果
     # 只显示文字结果
-    st.markdown(f"<p style='font-size:20px;'>守信概率：<span style='color:{color};font-weight:bold;'>{level}</span></p>",
+    st.markdown(f"<p style='font-size:20px;'>守信等级：<span style='color:{color};font-weight:bold;'>{level}</span></p>",
                 unsafe_allow_html=True)
 
     with st.expander("点击查看数据处理细节"):
