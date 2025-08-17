@@ -22,16 +22,16 @@ scaler = preprocessors['scaler']  # 4维标准化器
 normalizer = preprocessors['normalizer']  # 4维正则化器
 
 # 用户输入界面
-st.title('养老服务机构信用风险评估')
+st.title('民办养老机构信用风险评估')
 st.markdown("请输入指标：")
 
 # 输入字段
-CW02 = st.number_input("资本实力(万)")
-CP05 = st.number_input("融资背景(次数)")
+CW02 = st.number_input("注册资本(万)")
+CP05 = st.number_input("融资历程(次数)")
 CP02 = st.number_input("专利数量 ")
-CS03 = st.number_input("用工规模 ")
+CS03 = st.number_input("纳税员工数 ")
 
-if st.button('守信概率'):
+if st.button('守信等级'):
     input_data = pd.DataFrame([[CW02, CP05, CP02,CS03]],
                               columns=['CW02', 'CP05', 'CP02', 'CS03'])
     input_scaled = scaler.transform(input_data)
@@ -39,7 +39,7 @@ if st.button('守信概率'):
 
     prob = model.predict_proba(input_processed)[0, 1]
     # 数值显示
-    # st.success(f"**守信概率：{prob:.4%}**")
+    # st.success(f"**守信等级：{prob:.4%}**")
 
     # 根据概率值划分层次
     if prob < 0.94:
