@@ -62,58 +62,6 @@ if st.button('守信等级'):
         st.write("标准化后：", input_scaled)
         st.write("归一化后：", input_processed)
 
-    # SHAP解释
-    st.subheader("特征影响分析：")
-    # 获取基准值和SHAP值
-    shap_values = explainer.shap_values(input_processed)
-
-    # 兼容处理二分类/多分类
-    if isinstance(explainer.expected_value, (list, np.ndarray)):
-        base_value = explainer.expected_value[1]  # 多分类取第二类
-    else:
-        base_value = explainer.expected_value  # 二分类直接使用
-    # 在SHAP可视化前设置字体
-    plt.rcParams['font.family'] = 'Microsoft YaHei'
-    plt.rcParams['axes.unicode_minus'] = False
-    # 可视化
-    plt.figure()
-    shap.force_plot(
-        base_value,
-        shap_values[0],  # 取第一个样本的SHAP值
-        input_data.iloc[0],  # 取第一个样本的特征值
-        matplotlib=True
-    )
-    st.pyplot(plt.gcf())
-
-    # 创建瀑布图样式的个体特征分析
-    fig, ax = plt.subplots(figsize=(10, 6))
-
-    # 按影响大小排序
-    feature_order = sorted(zip(input_data.columns, shap_values[0]),
-                           key=lambda x: abs(x[1]), reverse=False)
-    ordered_features = [x[0] for x in feature_order]
-    ordered_values = [x[1] for x in feature_order]
-
-    # 绘制每个特征的影响
-    y_pos = range(len(ordered_features))
-    colors = ['red' if val > 0 else 'green' for val in ordered_values]
-    ax.barh(y_pos, ordered_values, color=colors, alpha=0.6)
-    ax.set_yticks(y_pos)
-    ax.set_yticklabels(ordered_features)
-    ax.set_xlabel('SHAP值 (对预测概率的影响)')
-    ax.set_title('各特征对失信概率的影响')
-
-    # 添加基准线和预测线
-    ax.axvline(x=0, color='black', linestyle='--', linewidth=0.5)
-    ax.axvline(x=prob - base_value, color='blue', linestyle=':', linewidth=1,
-               label=f'预测值 ({prob:.1%})')
-
-    # # 添加数值标签
-    # for i, v in enumerate(ordered_values):
-    #     ax.text(v, i, f"{v:.3f}", color='black', ha='left' if v < 0 else 'right',va='center', fontsize=9)
-    # ax.legend()
-    # st.pyplot(fig)
-
     # 显示原始输入值作为参考
     st.markdown("**当前输入值:**")
     st.dataframe(input_data.style.format("{:.1f}"))
