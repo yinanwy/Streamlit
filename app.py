@@ -48,7 +48,7 @@ if st.button('守信等级'):
     elif prob < 0.992:
         level = "审核级"
         color = "orange"
-    elif prob < 0.997:
+    elif prob < 0.998:
         level = "观察级"
         color = "Yellow"
     else:
