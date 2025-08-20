@@ -42,14 +42,17 @@ if st.button('守信等级'):
     # st.success(f"**守信等级：{prob:.4%}**")
 
     # 根据概率值划分层次
-    if prob < 0.94:
-        level = "低"
+    if prob < 0.85:
+        level = "预警级"
         color = "red"
-    elif prob < 0.995:
-        level = "中"
+    elif prob < 0.99:
+        level = "审核级"
         color = "orange"
+    elif prob < 0.999:
+        level = "观察级"
+        color = "Yellow"
     else:
-        level = "高"
+        level = "优质级"
         color = "green"
 
     # 使用HTML标记和颜色显示结果
